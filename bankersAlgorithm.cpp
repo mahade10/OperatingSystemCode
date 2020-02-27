@@ -23,9 +23,11 @@ bool isSafe(int processes[],int avail[],int maxm[][R],int allot[][R]){
             for(int p=0;p<P; p++){
                 if (finish[p] == 0){
                     int j;
-                    for(j=0;j<R;j++)
+                    for(j=0;j<R;j++){
                         if(need[p][j]>work[j])
                             break;
+                        }
+
                     if(j==R){
                         for(int k=0;k<R;k++)
                             work[k] += allot[p][k];
@@ -52,7 +54,12 @@ bool isSafe(int processes[],int avail[],int maxm[][R],int allot[][R]){
 int main()
 {
     int processes[] = {0,1,2,3,4};
-    int avail[] = {3,3,2};
+    int avail[R] ={0};
+    int instances[R] = {0};
+    cout<<"Enter instances\n";
+    for(int i=0;i<R;i++){
+        cin>>instances[i];
+    }
     int maxm[][R] = {{7,5,3},
                     {3,2,2},
                     {9,0,2},
@@ -63,6 +70,14 @@ int main()
                     {3,0,2},
                     {2,1,1},
                     {0,0,2}};
+      int temp[R] = {0};
+      for(int i = 0;i<R;i++){
+        for(int j = 0;j<P;j++){
+            temp[i] = temp[i] + allot[j][i];
+        }
+            avail[i] = instances[i]-temp[i];
+      }
+
       isSafe(processes, avail, maxm, allot);
       return 0;
 }
