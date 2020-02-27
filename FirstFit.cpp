@@ -1,7 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 void FirstFit(int block[],int process[],int b,int p){
-    int allot[p] = {-1};
+    int allot[p];
+    memset(allot,-1,sizeof(allot));
     for(int i=0;i<p;i++){
         for(int j=0;j<b;j++){
             if(process[i]<=block[j]){
