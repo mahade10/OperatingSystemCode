@@ -35,6 +35,7 @@ void findWaitingTime(int pro[],int n,int B[]){
         cout<<" "<<pro[i]<<"\t\t"<<B[i]<<"\t\t"
             <<wt[i]<<"\t\t"<<tn[i]<<endl;
          }
+    
 
 }
 int main()
