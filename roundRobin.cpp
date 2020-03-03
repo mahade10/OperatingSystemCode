@@ -1,42 +1,76 @@
-#include<bits/stdc++.h>
+#include<bits\stdc++.h>
 using namespace std;
+void waiting(int n,int q,int p[],int b[],int wt[]){
+    int rem_bt[n],i,t;
+    for(i=0;i<n;i++){
+        rem_bt[i]=b[i];
+    }
+    t=0;
+    while(1){
+        bool done=true;
+        for(i=0;i<n;i++){
+            if(rem_bt[i]>0){
+                done=false;
+                if(rem_bt[i]>q){
+                    t=t+q;
+                    rem_bt[i]=rem_bt[i]-q;
+                }
+                else{
+                    t=t+rem_bt[i];
+                    wt[i]=t-b[i];
+                    rem_bt[i]=0;
+                }
+            }
+        }
+        if(done==true){
+            break;
+        }
+    }
+
+}
+
+void turnaround(int n,int p[],int b[],int wt[],int tat[]){
+    for(int i=0;i<n;i++){
+        tat[i]=b[i]+wt[i];
+    }
+}
+
+void avgtime(int n,int q,int p[],int b[]){
+    int i,wt[n],tat[n],t_wt=0,t_tat=0;
+    waiting(n,q,p,b,wt);
+    turnaround(n,p,b,wt,tat);
+
+    cout<<"process   "<<"burst time  "<<"waiting time  "<<"turnaround time "<<endl;
+    for(i=0;i<n;i++){
+        t_wt=t_wt+wt[i];
+        t_tat=t_tat+tat[i];
+        cout<<"p"<<p[i]<<"\t\t"<<b[i]<<"\t\t"<<wt[i]<<"\t\t"<<tat[i]<<endl;
+    }
+
+    cout<<"avarage waitting time: "<<(float)t_wt/(float)n<<endl;
+    cout<<"avarage turnaround time: "<<(float)t_tat/(float)n<<endl;
+}
 
 int main()
 {
-    int a[20],b[20],x[20],i,j,time,count=0,smallest,wt[10],tn[20],n,twt=0,ttn=0,end;
-    cout<<"enter the number of process: ";
+    int i,n,p[20],b[20],q;
+
+    cout<<"Enter the Quantum Number: ";
+    cin>>q;
+    cout<<endl;
+
+    cout<<"Enter the number of process: ";
     cin>>n;
-    cout<<"\nEnter the arival & burst time: "<<endl;
+    cout<<endl;
+
+    cout<<"Enter the process & burst time: ";
+    cout<<endl;
+
     for(i=0;i<n;i++){
-        cin>>a[i]>>b[i];
-        x[i]=b[i];
+        cout<<"p";
+        cin>>p[i];
+        cin>>b[i];
     }
-    b[19]=9999;
-    for(time=0;count!=n;time++){
-        smallest=19;
-        for(i=0;i<n;i++){
-            if(a[i]<=time && b[i]<b[smallest] && b[i]>0){
-                smallest = i;
-            }
-        }
-        b[smallest]--;
-        if(b[smallest]==0){
-            count++;
-            end=time+1;
-            wt[smallest]=end-a[smallest]-x[smallest];
-            tn[smallest]=end-a[smallest];
-
-        }
-    }
-    cout<<"\nprocess    "<<"arivaltime      "<<"bursttime    "<<"wait time   "<<"turn time"<<endl;
-    for(i=0;i<n;i++){
-        cout<<"p"<<i+1<<"\t\t"<<a[i]<<"\t\t"<<b[i]<<"\t\t"<<wt[i]<<"\t\t"<<tn[i]<<endl;
-        twt=twt+wt[i];
-        ttn=ttn+tn[i];
-    }
-    cout<<"avarage waitting time: "<<(float)twt/(float)n<<endl;
-    cout<<"avarage turnaround time: "<<(float)ttn/(float)n<<endl;
-
-
+    avgtime(n,q,p,b);
     return 0;
 }
