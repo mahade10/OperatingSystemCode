@@ -30,7 +30,7 @@ int main()
     }
     cout<<"\nprocess    "<<"arivaltime      "<<"bursttime    "<<"wait time   "<<"turn time"<<endl;
     for(i=0;i<n;i++){
-        cout<<"p"<<i+1<<"\t\t"<<a[i]<<"\t\t"<<b[i]<<"\t\t"<<wt[i]<<"\t\t"<<tn[i]<<endl;
+        cout<<"p"<<i+1<<"\t\t"<<a[i]<<"\t\t"<<x[i]<<"\t\t"<<wt[i]<<"\t\t"<<tn[i]<<endl;
         twt=twt+wt[i];
         ttn=ttn+tn[i];
     }
